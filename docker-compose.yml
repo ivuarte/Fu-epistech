@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: ./EpistechBackend
+      dockerfile: Dockerfile
+    container_name: epistech-backend
+    env_file:
+      - ./EpistechBackend/.env   # opcional, si tienes uno
+    ports:
+      - "4000:4000"              # host:container (ajusta al puerto real)
+    networks:
+      - net_container
+
+  frontend:
+    build:
+      context: ./EpistechFrontend
+      dockerfile: Dockerfile
+    container_name: epistech-frontend
+    depends_on:
+      - backend
+    ports:
+      - "3009:80"                # frontend accesible en http://localhost:3000
+    environment:
+      # apunta el frontend al backend dentro de la red docker
+      # ajusta la variable según tu frontend (VITE_API_URL, REACT_APP_API_URL, NEXT_PUBLIC_..., etc.)
+      - VITE_API_URL=http://epistech-backend:4000
+    networks:
+      - net_container
+
+networks:
+  net_container:
+    external: true
+    #driver: bridge
+  

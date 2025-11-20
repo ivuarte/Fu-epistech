@@ -1,21 +1,19 @@
-# Usa una imagen base oficial de Node.js
-FROM node:20-slim
+# EpistechBackend/Dockerfile
+FROM node:20-alpine
 
-# Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
 
-# Copia los archivos package.json y package-lock.json (o yarn.lock)
-# antes de instalar las dependencias. Esto permite a Docker usar la caché de capas
-# si las dependencias no han cambiado, acelerando las futuras construcciones.
+# Solo copiamos los manifests primero para cachear la instalación
 COPY package*.json ./
 
-RUN npm install --only=production
+# Instala dependencias (usa npm ci si tienes package-lock.json)
+RUN npm install --omit=dev
 
-# Copia el resto del código de la aplicación al directorio de trabajo en el contenedor
+# Ahora copiamos el resto del código
 COPY . .
 
-# Expone el puerto en el que la aplicación Express escuchará.
-# Asegúrate de que este puerto coincida con el puerto que tu aplicación usa (por defecto 4000 en tu index.js)
+# AJUSTA este puerto al que realmente usa tu backend
 EXPOSE 4000
 
+# Usa el script "start" de tu package.json
 CMD ["npm", "start"]
