@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  backend-app:
+    # Construye la imagen a partir del Dockerfile en el directorio actual (.)
+    build: .
+    container_name: epistech_backend
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "4000:4000"
+    networks:
+      - net_container
+networks:
+  net_container:
+    external: true

@@ -1,0 +1,27 @@
+{
+  "name": "backend_2.0",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon"
+  },
+  "author": "MayeBallen",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "date-fns-tz": "^3.1.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "moment-timezone": "^0.5.45",
+    "mssql": "^10.0.2",
+    "mysql2": "^3.14.2",
+    "nodemon": "^3.1.3",
+    "redis": "^4.7.0"
+  }
+}
